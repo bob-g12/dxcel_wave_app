@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# first_django_appフォルダ内のviews.pyをインポート
+from App_Folder import views as views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('views/',views.index,name='index'), # views記載の関数のpathを追記
 ]
