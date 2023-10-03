@@ -1,11 +1,26 @@
 from django.shortcuts import render
+from . import forms
+from django.views.generic import TemplateView
 
-# HTTPResponseというクラスをインポート
-from django.http import HttpResponse
+class FormView(TemplateView):
 
-# View関数を任意に定義
-def index(request):
-        # 変数設定
-    params = {"message_me": "Hello World"}
-    # 出力
-    return render(request,'App_Folder_HTML/index.html',context=params)
+    # 初期変数定義
+    def __init__(self):
+        self.params = {"Message":"情報を入力してください。",
+                       "form":forms.Contact_Form(),
+                       }
+
+    # GET時の処理を記載
+    def get(self,request):
+        return render(request, "App_Folder_HTML/formpage.html",context=self.params)
+
+    # POST時の処理を記載
+    def post(self,request):
+        if request.method == "POST":
+            self.params["form"] = forms.Contact_Form(request.POST)
+            
+            # フォーム入力が有効な場合
+            if self.params["form"].is_valid():
+                self.params["Message"] = "入力情報が送信されました。"
+
+        return render(request, "App_Folder_HTML/formpage.html",context=self.params)
