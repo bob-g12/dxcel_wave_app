@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # モデルをインポート
-from . models import モデルクラス名
+from . models import People
 
 # 管理ツールに登録
-admin.site.register(モデルクラス名)
+admin.site.register(People)
