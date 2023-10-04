@@ -22,6 +22,8 @@ class FormView(TemplateView):
             
             # フォーム入力が有効な場合
             if self.params["form"].is_valid():
+                #入力項目をデータベースに保存
+                self.params["form"].save(commit=True)
                 self.params["Message"] = "入力情報が送信されました。"
 
         return render(request, "App_Folder_HTML/formpage.html",context=self.params)
