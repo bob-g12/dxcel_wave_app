@@ -2,6 +2,7 @@ from django.shortcuts import render
 from . import forms
 from django.views.generic import TemplateView
 
+#Simport forms
 class FormView(TemplateView):
 
     # 初期変数定義
@@ -9,7 +10,7 @@ class FormView(TemplateView):
         self.params = {"Message":"情報を入力してください。",
                        "form":forms.Contact_Form(),
                        }
-
+    
     # GET時の処理を記載
     def get(self,request):
         return render(request, "App_Folder_HTML/formpage.html",context=self.params)
